@@ -28,6 +28,13 @@ function Task({ task, onTaskEdit, onTaskDelete }) {
       ) : (
         <>
           <span>{task.title}</span>
+          <input
+            type="checkbox"
+            checked={task.completed}
+            onChange={(e) => {
+              onTaskEdit(task.id, task.title, e.target.checked);
+            }}
+          />
           <button onClick={handleEdit}>Editar</button>
           <button onClick={() => onTaskDelete(task.id)}>Deletar</button>
         </>
@@ -40,6 +47,7 @@ Task.propTypes = {
   task: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
+    completed: PropTypes.bool.isRequired, // Adicione a propriedade 'completed' como um booleano
   }),
   onTaskEdit: PropTypes.func.isRequired,
   onTaskDelete: PropTypes.func.isRequired,

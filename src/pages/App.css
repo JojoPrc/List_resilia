@@ -1,42 +1,154 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Estilo global */
+:root {
+    color: #ffffff;
+    background-color: #230b1b;
   }
-  to {
-    transform: rotate(360deg);
+  
+  /* Estilos para cabeçalho */
+  h1 {
+    font-size: 3.2em;
+    line-height: 1.1;
+    text-align: center;
   }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  
+  /* Estilos para spam */
+  span {
+    display: inline-block; 
+    padding: 5px 10px; 
+    border-radius: 4px; 
+    background-color: #542250; 
+    color: white;
+    font-weight: bold;
+    border-color: #230b1b;
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
+  
+  
+  /* Estilo para input de texto */
+  input {
+    font-family: inherit;
+    font-size: 1em;
+    font-weight: 400;
+    border: 1px solid #ccc;
+    padding: 0.6em 1.2em;
+    border-radius: 8px;
+    background-color: #230b1b;
+  }
+  
+  /* Estilo para o input do checkbox */
+  input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 8px;
+    height: 10px;
+    border: 2px solid #3b1735;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+    margin-right: 8px;
+  }
+  
+  /* Estilos para a barra de pesquisa */
+  .search-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+  }
+  
+  /* Estilos para o formulário de tarefas */
+  .task-form {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+  }
+  
+  /* Estilos para o container de tarefas */
+  .task-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  /* Estilo para cada tarefa */
+  .task {
+    width: 200px;
+    margin: 10px;
+  }
+  
+  /* Estilo para o input do checkbox quando marcado */
+  input[type="checkbox"]:checked {
+    background-color: #4CAF50;
+    border: 2px solid #000000;
+  }
+  
+  /* Estilização do rótulo do checkbox */
+  .checkbox-label {
+    font-family: 'Young Serif', serif;
+    font-size: 1px;
+    color: #3b1735;
+  }
+  
+  /* Estilos para botões */
+  button {
+    font-family: 'Young Serif', serif;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    background-color: #3b1735;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    margin: 20px;
+  }
+  
+  button:hover {
+    border-color: #6d2d6a;
+  }
+  
+  button:focus,
+  button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
+  
+  /* Estilos para mensagens de conclusão e não encontradas */
+  .completed-task-message {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .no-tasks-message {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  /* Estilos para modo claro */
+  @media (prefers-color-scheme: light) {
+    :root {
+      color: #213547;
+      background-color: #ffffff;
+    }
+  
+    a:hover {
+      color: #747bff;
+    }
+  
+    button {
+      background-color: #f9f9f9;
+    }
+  }
+  
