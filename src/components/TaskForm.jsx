@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 
-const TaskForm = ({ onTaskAdd }) => {
+function TaskForm({ onTaskAdd }) {
   const [task, setTask] = useState('');
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    // Valide os dados se necessário
-    onTaskAdd({ title: task });
-    setTask(''); // Limpe o campo após adicionar a tarefa
+
+    // Verifica se o campo de tarefa não está vazio
+    if (task.trim() === '') {
+      return; // Sai da função se estiver vazio
+    }
+
+    onTaskAdd(task);
+    setTask('');
   };
 
   return (
@@ -15,12 +20,12 @@ const TaskForm = ({ onTaskAdd }) => {
       <input
         type="text"
         value={task}
-        onChange={e => setTask(e.target.value)}
+        onChange={(e) => setTask(e.target.value)}
         placeholder="Adicionar uma nova tarefa"
       />
-      <button type="submit">Adicionar</button>
+      <button type="submit" disabled={!task.trim()}>Adicionar</button>
     </form>
   );
-};
+}
 
 export default TaskForm;
