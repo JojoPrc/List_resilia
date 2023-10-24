@@ -15,6 +15,10 @@ function App() {
   const [completedTaskMessage, setCompletedTaskMessage] = useState('');
   // Estado para exibir mensagem de nenhuma tarefa encontrada
   const [noTasksFoundMessage, setNoTasksFoundMessage] = useState('');
+  // Estado para rastrear o texto de pesquisa
+  const [searchText, setSearchText] = useState('');
+  // Estado para rastrear se a pesquisa está ativa
+  const [isSearching, setIsSearching] = useState(false);
 
   // Função para adicionar uma nova tarefa
   const addTask = (title) => {
@@ -48,18 +52,35 @@ function App() {
 
   // Função para lidar com a pesquisa de tarefas
   const handleSearch = (searchText) => {
-    const filtered = tasks.filter((task) =>
-      task.title.toLowerCase().includes(searchText.toLowerCase())
-    );
+    setSearchText(searchText);
 
-    if (filtered.length === 0) {
-      setNoTasksFoundMessage('Nenhuma tarefa encontrada.');
-      setTimeout(() => {
-        setNoTasksFoundMessage('');
-      }, 3000);
+    if (searchText.trim() === '') {
+      // Se o campo de pesquisa estiver vazio, não estamos mais pesquisando
+      setIsSearching(false);
+      setFilteredTasks([]);
+      setNoTasksFoundMessage(''); // Limpa a mensagem de "Nenhuma tarefa encontrada"
+    } else {
+      // Se há texto de pesquisa, estamos pesquisando
+      setIsSearching(true);
+
+      const filtered = tasks.filter((task) =>
+        task.title.toLowerCase().includes(searchText.toLowerCase())
+      );
+
+      if (filtered.length === 0) {
+        setNoTasksFoundMessage('Nenhuma tarefa encontrada.');
+      }
+
+      setFilteredTasks(filtered);
     }
+  };
 
-    setFilteredTasks(filtered);
+  // Função para limpar o filtro
+  const clearFilter = () => {
+    setSearchText('');
+    setIsSearching(false);
+    setFilteredTasks([]);
+    setNoTasksFoundMessage(''); // Limpa a mensagem de "Nenhuma tarefa encontrada"
   };
 
   useEffect(() => {
@@ -82,6 +103,10 @@ function App() {
       <TaskForm onTaskAdd={addTask} />
       {/* Componente para pesquisar tarefas */}
       <SearchBar onSearch={handleSearch} />
+      {/* Botão "Limpar pesquisa" */}
+      {isSearching && (
+        <button onClick={clearFilter}>Limpar Pesquisa</button>
+      )}
       {/* Componente para listar tarefas */}
       <TaskList tasks={filteredTasks.length > 0 ? filteredTasks : tasks} onTaskEdit={editTask} onTaskDelete={deleteTask} />
       {noTasksFoundMessage && (
